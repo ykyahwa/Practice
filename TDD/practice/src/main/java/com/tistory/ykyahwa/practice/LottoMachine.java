@@ -37,4 +37,26 @@ class LottoMachine {
         Arrays.sort(numbers);
         return numbers;
     }
+
+    public int getLottoCheckCount(int[] result, int[] myLotto) {
+
+        int count = 0;
+        for (int resultNumber: result) {
+            for (int myLottoNumber: myLotto) {
+                if (resultNumber == myLottoNumber) count++;
+            }
+        }
+
+        return count;
+    }
+
+    public int getGrade(int count) {
+        switch (count) {
+            case 6 : return 1;
+            case 5 : return 2;
+            case 4 : return 3;
+            case 3 : return 4;
+            default: return 0;
+        }
+    }
 }

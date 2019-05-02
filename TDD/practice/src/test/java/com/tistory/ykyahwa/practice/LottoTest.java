@@ -61,6 +61,26 @@ public class LottoTest {
         }
     }
 
+    @Test
+    public void 맞춘갯수확인() {
+        int[] result = new int[]{44,33,22,11,7,34};
+        int[] myLotto = new int[]{33,2,3,44,5,8};
+
+        LottoMachine lottoMachine = new LottoMachine();
+        assertThat(lottoMachine.getLottoCheckCount(result, myLotto), is(2));
+    }
+
+    @Test
+    public void 등수확인() {
+
+        LottoMachine lottoMachine = new LottoMachine();
+        assertThat(lottoMachine.getGrade(6), is(1));
+        assertThat(lottoMachine.getGrade(5), is(2));
+        assertThat(lottoMachine.getGrade(4), is(3));
+        assertThat(lottoMachine.getGrade(3), is(4));
+        assertThat(lottoMachine.getGrade(2), is(0));
+    }
+
     private boolean isLottoNumber(int number) {
         return number >= 1 && number <= 45;
     }
