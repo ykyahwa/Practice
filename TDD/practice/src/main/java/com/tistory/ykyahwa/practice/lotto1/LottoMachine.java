@@ -1,4 +1,4 @@
-package com.tistory.ykyahwa.practice;
+package com.tistory.ykyahwa.practice.lotto1;
 
 import java.util.Arrays;
 
