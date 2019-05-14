@@ -3,9 +3,7 @@ package com.tistory.ykyahwa.practice.lotto_live;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -59,13 +57,7 @@ public class LottoLiveTest {
     @Test
     public void 정렬() {
 
-        Set<Integer> lottoGame = new HashSet<>();
-        lottoGame.add(22);
-        lottoGame.add(11);
-        lottoGame.add(44);
-        lottoGame.add(33);
-        lottoGame.add(1);
-        lottoGame.add(45);
+        Set<Integer> lottoGame = makeDummyLotto(22,11,44,33,1,45);
 
         List<Integer> sortList = lottoMachine.sort(lottoGame);
 
@@ -84,4 +76,37 @@ public class LottoLiveTest {
     }
 
 
+    @Test
+    public void 맞춘_갯수_확인() {
+
+        Set<Integer> result = makeDummyLotto(1,2,3,4,5,6);
+
+        assertEquals(6, lottoMachine.checkCount(makeDummyLotto(1,2,3,4,5,6), result));
+        assertEquals(5, lottoMachine.checkCount(makeDummyLotto(1,2,3,4,5,7), result));
+        assertEquals(4, lottoMachine.checkCount(makeDummyLotto(1,2,3,4,8,7), result));
+        assertEquals(3, lottoMachine.checkCount(makeDummyLotto(1,2,3,10,8,7), result));
+        assertEquals(2, lottoMachine.checkCount(makeDummyLotto(1,2,33,10,8,7), result));
+        assertEquals(1, lottoMachine.checkCount(makeDummyLotto(1,45,33,10,8,7), result));
+        assertEquals(0, lottoMachine.checkCount(makeDummyLotto(11,45,33,10,8,7), result));
+    }
+
+    @Test
+    public void 등수확인() {
+
+        assertEquals(1, lottoMachine.getGrade(6));
+        assertEquals(2, lottoMachine.getGrade(5));
+        assertEquals(3, lottoMachine.getGrade(4));
+        assertEquals(4, lottoMachine.getGrade(3));
+        assertEquals(5, lottoMachine.getGrade(2));
+        assertEquals(6, lottoMachine.getGrade(1));
+        assertEquals(7, lottoMachine.getGrade(0));
+    }
+
+    private Set<Integer> makeDummyLotto(int... numbers) {
+        Set<Integer> result = new HashSet<>();
+        for (int number: numbers) {
+            result.add(number);
+        }
+        return result;
+    }
 }

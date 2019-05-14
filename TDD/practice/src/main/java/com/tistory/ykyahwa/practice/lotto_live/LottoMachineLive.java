@@ -33,4 +33,26 @@ class LottoMachineLive {
         return sort(list);
     }
 
+    public int checkCount(Set<Integer> myLotto, Set<Integer> result) {
+        int checkCount = 0;
+        for (int myNumber: myLotto) {
+            if (result.contains(myNumber)) checkCount++;
+        }
+
+        return checkCount;
+    }
+
+    public int getGrade(int checkCount) {
+
+        switch (checkCount) {
+            case 6 : return 1;
+            case 5 : return 2;
+            case 4 : return 3;
+            case 3 : return 4;
+            case 2 : return 5;
+            case 1 : return 6;
+            case 0 : return 7;
+            default: throw new IllegalArgumentException("0~6 사이 입력하세요");
+        }
+    }
 }
